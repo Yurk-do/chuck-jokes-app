@@ -1,0 +1,71 @@
+.jokes-container {
+  width: 80%;
+  margin: 30px auto;
+}
+
+.joke-string {
+  text-align: left;
+}
+
+.container-logo-link {
+  width: 100%;
+  margin-top: 40px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.login-link-container {
+  margin-right: 100px;
+  color: rgb(51, 51, 75);
+  font-size: 25px;
+  font-weight: 700;
+}
+
+.login-link-user-name {
+  margin-left: 20px;
+  display: inline-block;
+  cursor: pointer;
+  color: rgb(88, 88, 179);
+  font-size: 30px;
+}
+
+.login-link-user-name:hover {
+  color: rgb(33, 33, 185);
+  transform: scale(1.1, 1.1);
+}
+
+.container-confirm-window {
+  display: none;
+  padding: 20px;
+  width: 300px;
+  height: 150px;
+  background-color: rgb(24, 24, 44);
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  position: absolute;
+  top: 50px;
+  right: 100px;
+  z-index: 10;
+  border-radius: 10px;
+}
+
+.container-confirm-window.visible {
+  display: block;
+}
+
+.confirm-window-button-container {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 20px;
+}
+
+.button-yes,
+.button-no {
+  font-size: 20px;
+  font-weight: 700;
+  width: 100px;
+  height: 40px;
+  cursor: pointer;
+}

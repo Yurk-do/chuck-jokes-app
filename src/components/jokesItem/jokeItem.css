@@ -1,0 +1,59 @@
+.joke-item-container {
+  display: flex;
+  align-items: center;
+}
+
+.joke-item-button-view {
+  min-width: 100px;
+  height: 50px;
+  border-radius: 10px;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+  background-color: rgb(95, 88, 88);
+}
+
+.joke-item-button-view.ready {
+  background-color: rgb(22, 22, 194);
+}
+
+.joke-item-button-delete {
+  margin-left: 20px;
+  min-width: 100px;
+  height: 50px;
+  border-radius: 25%;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+  background-color: rgb(95, 88, 88);
+}
+
+.joke-item-button-delete.ready {
+  background-color: rgb(241, 26, 26);
+}
+
+.joke-item-status-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 100px;
+  height: 50px;
+}
+
+.joke-item-status {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: red;
+}
+
+.joke-item-status.ready {
+  background-color: rgb(0, 255, 13);
+}
+
+.joke-item-desrciption {
+  text-align: left;
+}
+

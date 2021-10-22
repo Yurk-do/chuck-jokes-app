@@ -1,0 +1,10 @@
+.button-back {
+  margin-top: 70px;
+  margin-bottom: 40px;
+  height: 40px;
+  background-color: rgb(16, 16, 200);
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+}
+

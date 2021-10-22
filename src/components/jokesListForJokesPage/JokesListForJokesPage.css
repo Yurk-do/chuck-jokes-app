@@ -1,0 +1,10 @@
+.jokes-list-container {
+  width: 70%;
+  margin: 50px auto;
+}
+.joke {
+  font-size: 18px;
+  font-weight: 600;
+  text-align: left;
+  margin-bottom: 20px;
+}

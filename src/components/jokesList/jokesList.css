@@ -1,0 +1,8 @@
+.jokes-list-container {
+  width: 70%;
+  margin: 50px auto;
+}
+.not-jokes-title {
+  font-size: 18px;
+  font-weight: 600;
+}

@@ -1,0 +1,37 @@
+.main-container {
+}
+
+.button-registration {
+  margin-top: 40px;
+  padding: 10px;
+  color: white;
+  font-size: 25px;
+  font-weight: 700;
+  background-color: rgb(33, 149, 53);
+  border-radius: 10px;
+  cursor: pointer;
+}
+.button-registration:hover {
+  transform: scale(1.1, 1.1);
+  transition: all 0.6s ease;
+}
+.title-container {
+  padding-top: 20px;
+}
+.title {
+  font-size: 50px;
+  color: rgb(16, 16, 116);
+  font-weight: 700;
+}
+.subtitle {
+  font-size: 30px;
+  color: rgb(16, 79, 116);
+  font-weight: 700;
+}
+
+.auth-form-container {
+  margin-top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
