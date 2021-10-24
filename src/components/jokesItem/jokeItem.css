@@ -12,6 +12,7 @@
   font-weight: 600;
   text-transform: uppercase;
   background-color: rgb(95, 88, 88);
+  cursor: pointer;
 }
 
 .joke-item-button-view.ready {
@@ -28,6 +29,7 @@
   font-weight: 600;
   text-transform: uppercase;
   background-color: rgb(95, 88, 88);
+  cursor: pointer;
 }
 
 .joke-item-button-delete.ready {
@@ -56,4 +58,3 @@
 .joke-item-desrciption {
   text-align: left;
 }
-

@@ -1,13 +1,10 @@
-import axios from 'axios';
 import React, { FC, useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { loginIn } from '../../../redux/actionsCreater';
-import { responseDataType } from '../../../types/types';
 import LoginForm from '../../loginForm/LoginForm';
 import RegistrationForm from '../../registrationForm/RegistrationForm';
 import './homePage.css';
-import jwt_decoded from 'jwt-decode';
+import auth from '../../../assets/auth';
 
 const HomePage: FC = () => {
   const [registrationFormStatus, setRegistrationFormStatus] = useState(false);
@@ -23,38 +20,12 @@ const HomePage: FC = () => {
     setRegistrationFormStatus(!registrationFormStatus);
   };
 
-  const refreshData = () => {
+  useEffect(() => {
     if (!localStorage.getItem('token')) {
       return;
     }
-    auth();
-  };
-
-  const auth = async () => {
-    try {
-      const response: responseDataType = await axios.get(
-        `http://127.0.0.1:5000/api/auth/auth`,
-        {
-          headers: { Authorization: `${localStorage.getItem('token')}` },
-        }
-      );
-
-      localStorage.removeItem('token');
-      localStorage.setItem('token', response.data.token);
-
-      const decodedToken: any = jwt_decoded(response.data.token);
-
-      dispatch(loginIn(decodedToken.username, decodedToken.userStatus));
-
-      history.push(`/jokesListPage/${decodedToken.username}`);
-    } catch (error: any) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    refreshData();
-  }, []); 
+    auth(history, dispatch);
+  }, []);
 
   return (
     <div className='main-container'>
@@ -69,7 +40,15 @@ const HomePage: FC = () => {
         <h2 className='subtitle'>Лучшие шутки про Чака Нориса</h2>
       </div>
       <div className='auth-form-container'>
-        {registrationFormStatus ? <RegistrationForm /> : <LoginForm />}
+        {registrationFormStatus ? (
+          <RegistrationForm
+            changeRegistrationFormStatus={() => {
+              setRegistrationFormStatus(false);
+            }}
+          />
+        ) : (
+          <LoginForm />
+        )}
       </div>
     </div>
   );

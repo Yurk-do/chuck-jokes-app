@@ -1,8 +1,10 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import './jokeItem.css';
 import { useHistory, useRouteMatch } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchJokes } from '../../redux/actionsCreater';
+import ErrorWindow from '../windows/errorWindow/ErrorWindow';
+import { StateType } from '../../types/types';
 
 interface JokeItemProps {
   jokesQuantity: number;
@@ -22,6 +24,9 @@ const JokeItem: FC<JokeItemProps> = ({
 }) => {
   const dispatch = useDispatch();
 
+  const userStatus = useSelector((state: StateType) => state.app.userStatus);
+  const [statusErrorWindow, setStatusErrorWindow] = useState(false);
+
   const buttonDisabled: { [key: string]: boolean } = {
     [jokeStatusMap.pending]: true,
     [jokeStatusMap.ready]: false,
@@ -35,6 +40,9 @@ const JokeItem: FC<JokeItemProps> = ({
   };
 
   const deleteJokes = () => {
+    if (userStatus === 'viewer') {
+      return setStatusErrorWindow(true);
+    }
     dispatch(fetchJokes(null, jokesId));
   };
 
@@ -60,6 +68,15 @@ const JokeItem: FC<JokeItemProps> = ({
       >
         delete
       </button>
+      {statusErrorWindow && (
+        <ErrorWindow
+          mainMessage='У Вас нет прав доступа к удалению шуток'
+          extraMessage='Правом удаления шуток обладают пользователи со статусом "Creater"'
+          closeErrorWindow={() => {
+            setStatusErrorWindow(false);
+          }}
+        />
+      )}
     </div>
   );
 };

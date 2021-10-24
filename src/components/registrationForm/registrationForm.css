@@ -54,3 +54,7 @@ input,.select-user-status {
   transform: scale(1.1, 1.1);
   transition: all 0.6s ease;
 }
+
+.validate-error-message {
+  color: red;
+}

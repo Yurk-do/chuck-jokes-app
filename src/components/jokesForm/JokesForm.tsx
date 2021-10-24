@@ -8,12 +8,13 @@ import {
 } from '../../redux/actionsCreater';
 import { StateType } from '../../types/types';
 import './jokesForm.css';
+import ErrorWindow from '../windows/errorWindow/ErrorWindow';
 
 const JokesForm: FC = () => {
   const dispatch = useDispatch();
 
   const userStatus = useSelector((state: StateType) => state.app.userStatus);
-  const [statusErrorWindow, setStatusErrorWindow] = useState('');
+  const [statusErrorWindow, setStatusErrorWindow] = useState(false);
 
   const quantity = useSelector((state: StateType) => state.jokes.quantity);
   const alertMessage = useSelector(
@@ -22,7 +23,6 @@ const JokesForm: FC = () => {
 
   if (!Number(quantity) && quantity !== '') {
     dispatch(showAlert('Допустимо введение только числовых значений!'));
-    console.log(alertMessage);
   } else {
     dispatch(hideAlert());
   }
@@ -33,15 +33,10 @@ const JokesForm: FC = () => {
   };
 
   const getJokes = () => {
-    console.log(userStatus);
     if (userStatus === 'viewer') {
-      return setStatusErrorWindow('active');
+      return setStatusErrorWindow(true);
     }
     dispatch(fetchJokes(quantity));
-  };
-
-  const closeErrorWindow = () => {
-    setStatusErrorWindow('');
   };
 
   return (
@@ -63,18 +58,15 @@ const JokesForm: FC = () => {
         Запросить
       </button>
       <p className='input-alert-message'>{alertMessage}</p>
-      <div className={`error-window ${statusErrorWindow}`}>
-        <div className='content-container'>
-          <p>У Вас нет прав доступа к запросу шуток</p>
-          <p>Данным правом обладают пользователи со статусом "Creater"</p>
-        </div>
-        <button
-          className='button-close-error-window'
-          onClick={closeErrorWindow}
-        >
-          OK
-        </button>
-      </div>
+      {statusErrorWindow && (
+        <ErrorWindow
+          mainMessage='У Вас нет прав доступа к запросу шуток'
+          extraMessage='Правом запроса шуток обладают пользователи со статусом "Creater"'
+          closeErrorWindow={() => {
+            setStatusErrorWindow(false);
+          }}
+        />
+      )}
     </div>
   );
 };

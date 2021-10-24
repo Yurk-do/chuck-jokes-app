@@ -1,0 +1,22 @@
+.notification-window {
+  padding: 20px;
+  padding-bottom: 40px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 300px;
+  height: 100px;
+  color: white;
+  font-size: 20px;
+  background-color: rgb(50, 50, 184);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -200px;
+  z-index: 10;
+}
+
+.notification-window.red {
+  background-color: rgb(138, 6, 6);
+}

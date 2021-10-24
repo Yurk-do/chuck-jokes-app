@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import './loginForm.css';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
@@ -6,6 +6,7 @@ import { responseDataType } from '../../types/types';
 import { loginIn } from '../../redux/actionsCreater';
 import { useHistory } from 'react-router';
 import jwt_decoded from 'jwt-decode';
+import NotificationWindow from '../windows/notificationWindow/NotificationWindow';
 
 type objectAuthFormDataType = {
   username: string;
@@ -21,8 +22,14 @@ const LoginForm: FC = () => {
 
   const dispatch = useDispatch();
 
-  const [name, setName] = React.useState('');
-  const [password, setPassword] = React.useState('');
+  const [name, setName] = useState('');
+  const [password, setPassword] = useState('');
+
+  const [notificationData, setNotificationData] = useState({
+    message: '',
+    status: false,
+    isError: false,
+  });
 
   const setValuesFuncMap: { [key: string]: Function } = {
     name: setName,
@@ -51,10 +58,19 @@ const LoginForm: FC = () => {
       const decodedToken: any = jwt_decoded(response.data.token);
 
       dispatch(loginIn(decodedToken.username, decodedToken.userStatus));
-      console.log(decodedToken);
       history.push(`/jokesListPage/${decodedToken.username}`);
     } catch (error: any) {
-      console.log(error.response.data);
+      if (error.response.data.message) {
+        setNotificationData({
+          message: error.response.data.message,
+          status: true,
+          isError: true,
+        });
+
+        setTimeout(() => {
+          setNotificationData({ ...notificationData, status: false });
+        }, 3000);
+      }
     }
   };
 
@@ -86,6 +102,12 @@ const LoginForm: FC = () => {
           Авторизироваться
         </button>
       </form>
+      {notificationData.status && (
+        <NotificationWindow
+          isError={notificationData.isError}
+          notificationMessage={notificationData.message}
+        />
+      )}
     </div>
   );
 };
